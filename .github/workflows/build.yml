@@ -43,7 +43,7 @@ jobs:
     - name: Package app/dist and chatnio
       run: |
         mkdir package
-        cp -r app/dist package/
+        cp -r app/dist package/app/
         cp chatnio package/
         zip -r chatnio_package.zip package
 
