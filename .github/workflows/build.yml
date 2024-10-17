@@ -40,11 +40,15 @@ jobs:
     - name: Build Go application
       run: go build -o chatnio
 
-    - name: Package entire directory
-      run: zip -r app-dist.zip ./app/dist  # 使用 zip 将app/dist录压缩为 app-dist.zip
+    - name: Package app/dist and chatnio
+      run: |
+        mkdir package
+        cp -r app/dist package/
+        cp chatnio package/
+        zip -r chatnio_package.zip package
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: chatnio
-        path: ./chatnio app-dist.zip
+        path: chatnio_package.zip
