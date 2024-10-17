@@ -19,7 +19,7 @@ jobs:
     - name: Set up Node.js environment
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # 设置你需要的Node.js版本
+        node-version: '20'  # 设置的Node.js版本
 
     - name: Install pnpm
       run: npm install -g pnpm
@@ -35,13 +35,16 @@ jobs:
     - name: Set up Go environment
       uses: actions/setup-go@v4
       with:
-        go-version: '1.22'  # 设置你需要的Go版本
+        go-version: '1.22'  # 设置Go版本
 
     - name: Build Go application
       run: go build -o chatnio
+
+    - name: Package entire directory
+      run: zip -r chatnio.zip .  # 使用 zip 将整个目录压缩为 chatnio.zip
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: chatnio
-        path: ./chatnio
+        path: chatnio.zip
